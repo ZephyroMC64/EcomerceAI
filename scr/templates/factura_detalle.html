@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Factura #{{ pedido.id }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="factura-container">
+            
+            <h2>Factura #{{ pedido.id }}</h2>
+
+            <p><strong>Fecha:</strong> {{ pedido.fecha_creacion.strftime("%Y-%m-%d") }}</p>
+            <p><strong>Total:</strong> ${{ "%.2f"|format(pedido.total) }}</p>
+            <p><strong>Estado:</strong> {{ pedido.estado }}</p>
+
+            <hr>
+
+            <h3>Dirección de Envío</h3>
+            <p>{{ direccion.linea1 }}</p>
+            <p>{{ direccion.ciudad }} - {{ direccion.pais }}</p>
+            <p><strong>Código Postal:</strong> {{ direccion.codigo_postal }}</p>
+
+            <hr>
+
+            <h3>Productos</h3>
+            <table class="factura-productos-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {# Nota: El ciclo parece necesitar ajuste en tu controlador Python para acceder a `nombre` y `descripcion` #}
+                    {% for d, nombre, descripcion in detalles %}
+                    <tr>
+                        <td>{{ nombre }}</td>
+                        <td>{{ d.cantidad }}</td>
+                        <td>${{ "%.2f"|format(d.precio_unitario) }}</td>
+                        <td>${{ "%.2f"|format(d.cantidad * d.precio_unitario) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <hr>
+
+            <h3>Resumen de Pago</h3>
+            <p><strong>Estado del pago:</strong> {{ pago.estado }}</p>
+            <p><strong>Referencia:</strong> {{ pago.referencia_externa }}</p>
+            
+            <hr>
+
+            <a href="{{ url_for('ver_facturas') }}" class="btn-secondary">
+                Volver a Mis Facturas
+            </a>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio - E-commerce Inteligente{% endblock %}
+
+{% block content %}
+    <div class="container"> {# Agrega un contenedor si no lo tienes ya en base.html para centrar el contenido #}
+        <h1>Bienvenido a Nuestra Plataforma de E-commerce</h1>
+        {% if 'user_id' in session:%}
+        <p>¡Hola, **{{ session['user_name'] }}**!</p>
+        {% endif %}
+        <section>
+            <h2>Recomendaciones para ti</h2>
+            <img src="{{ url_for('static', filename='img/4.jpg') }}" alt="Nuevos Gadgets Tech">
+            <p>Aprovecha nuestros algoritmos de IA para encontrar exactamente lo que necesitas.</p>
+
+        </section>
+
+        <section class="featured-products">
+            <h2>Ofertas Destacadas y Novedades</h2>
+            <p>Descubre lo más reciente y nuestras promociones especiales.</p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='img/ofertas1.png') }}" alt="Oferta de Verano">
+                    <div class="product-info">
+                        <h3>Ofertas de Verano</h3>
+                        <p>Hasta 50% de descuento en ropa y accesorios.</p>
+                        <a href="{{ url_for('catalogo') }}" class="cta-button">Ver Ofertas</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='img/ofertas2.jpg') }}" alt="Nuevos Gadgets Tech">
+                    <div class="product-info">
+                        <h3>Nuevos Gadgets Tech</h3>
+                        <p>Lo último en tecnología al alcance de tu mano.</p>
+                        <a href="{{ url_for('catalogo') }}" class="cta-button">Explorar</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <img src="{{ url_for('static', filename='img/ofertas3.jpg') }}" alt="Decoración para el Hogar">
+                    <div class="product-info">
+                        <h3>Hogar y Decoración</h3>
+                        <p>Dale un nuevo aire a tu espacio con nuestra colección.</p>
+                        <a href="{{ url_for('catalogo') }}" class="cta-button">Comprar</a>
+                    </div>
+                </div>
+                
+                </div>
+        </section>
+        
+        <a href="{{ url_for('catalogo') }}" class="cta-button">Ver Todas las Ofertas</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle de {{ producto.nombre }} - E-commerce{% endblock %}
+
+{% block content %}
+    <div class="container product-detail-container">
+        <div class="product-header">
+            <p class="breadcrumbs">
+                <a href="{{ url_for('index') }}">Inicio</a> / 
+                <a href="{{ url_for('catalogo') }}">Catálogo</a> / 
+                <span>{{ producto.nombre }}</span>
+            </p>
+        </div>
+
+        <div class="detail-layout">
+            
+            {# Columna Izquierda: Imagen del Producto #}
+            <div class="product-image-gallery">
+                <img src="{{ url_for('static', filename='img/productos/' + producto.url_img) if producto.url_img else 'https://via.placeholder.com/600x400?text=Imagen+No+Disponible' }}" 
+                     alt="{{ producto.nombre }}" 
+                     class="main-product-image">
+            </div>
+
+            {# Columna Derecha: Información y Compra #}
+            <div class="product-info-block">
+                <h1>{{ producto.nombre }}</h1>
+                
+                <div class="product-price">
+                    <span class="price-label">Precio:</span> 
+                    <span class="large-price">${{ "{:,.2f}".format(producto.precio) }}</span>
+                </div>
+
+                <hr>
+
+                <h2>Descripción</h2>
+                <p>{{ producto.descripcion }}</p>
+
+                <hr>
+
+                {# Formulario de Compra #}
+                <form action="{{ url_for('agregar_carrito', producto_id=producto.id) }}" method="POST">
+                    
+                    {# Muestra el estado del stock #}
+                    {% if producto.stock_total > 0 %}
+                        <p class="stock-status in-stock">
+                            ✅ En Stock ({{ producto.stock_total }} disponibles)
+                        </p>
+                    {% else %}
+                        <p class="stock-status out-of-stock">
+                            ❌ Agotado
+                        </p>
+                    {% endif %}
+
+                    {# Input de Cantidad #}
+                    <div class="quantity-selector">
+                        <label for="quantity">Cantidad:</label>
+                        <input type="number" id="quantity" name="quantity" 
+                               value="1" min="1" max="{{ producto.stock_total }}" required 
+                               {% if producto.stock_total == 0 %}disabled{% endif %}>
+                    </div>
+                    
+                    {# Botón Añadir al Carrito #}
+                    <button type="submit" 
+                            class="cta-button large-button" 
+                            {% if producto.stock_total == 0 %}disabled{% endif %}>
+                        🛒 Añadir al Carrito
+                    </button>
+                </form>
+
+                <hr>
+                
+                {# Información de Categoría #}
+                {% if producto.categorias %}
+                <p><strong>Categorías:</strong>
+                    {% for categoria in producto.categorias %}
+                        <span class="category-tag"><a href="{{ url_for('catalogo', category_id=categoria.id) }}">{{ categoria.nombre }}</a></span>{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+                {% endif %}
+            </div>
+        </div>
+        
+        <hr>
+        
+        {# Sección de Recomendaciones de IA (Implementación futura) #}
+<section class="related-products">
+    <div class="container"> {# Asegúrate de que esta sección esté dentro de un container #}
+        <h3>Productos similares</h3>
+        <div class="row">
+            {% for p in similares %}
+                <div class="col-md-3 col-sm-6 col-12"> {# Agregadas clases para mejor responsividad #}
+                    <div class="card">
+                        <img src="{{ url_for('static', filename='img/productos/' ~ p.url_img) }}" {# Ajusta la ruta si es necesario #}
+                            alt="{{ p.nombre }}" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ p.nombre }}</h5>
+                            <p>${{ "%.2f"|format(p.precio) }}</p> {# Formatear el precio #}
+                            <a href="{{ url_for('detalle_producto', producto_id=p.id) }}" class="btn btn-primary">
+                                Ver Producto
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+        </section>
+    </div>
+{% endblock %}

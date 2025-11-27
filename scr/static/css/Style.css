@@ -1,0 +1,1048 @@
+/* Paleta de Colores: Profesional y Moderno */
+:root {
+    --primary-color: #007bff; /* Azul vibrante (CTAs, botones) */
+    --secondary-color: #6c757d; /* Gris para texto secundario */
+    --background-light: #f8f9fa; /* Fondo muy claro */
+    --text-dark: #343a40; /* Texto principal oscuro */
+    --accent-color: #28a745; /* Verde para éxito/ofertas */
+    --font-family: 'Arial', sans-serif;
+}
+
+/* Reset básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-dark);
+    background-color: var(--background-light);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto; /* Centra el contenido */
+    padding: 0 20px;
+}
+
+
+header {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    padding: 15px 0;
+    position: sticky; /* Fija la barra de navegación al hacer scroll */
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content:center; /* Alinea los enlaces a la derecha */
+    gap: 25px; /* Espacio entre los enlaces */
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+
+.cta-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.cta-button:hover {
+    background-color: #0056b3; /* Tono más oscuro al pasar el ratón */
+    transform: translateY(-1px); /* Efecto de "levantamiento" */
+}
+
+
+.content {
+    padding: 40px 0;
+    min-height: 80vh; /* Asegura que el footer esté abajo */
+}
+
+h1 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: var(--text-dark);
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+section {
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+
+footer {
+    background-color: var(--text-dark);
+    color: #f1f1f1;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+
+/* Estilos para la sección de Destacados/Banners */
+.featured-products {
+    display: flex; /* Habilita Flexbox */
+    justify-content: center; /* Centra los elementos */
+    gap: 20px; /* Espacio entre las tarjetas de producto/banner */
+    flex-wrap: wrap; /* Permite que las tarjetas salten a la siguiente línea si no caben */
+    margin-top: 40px;
+}
+
+.product-card, .banner-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Asegura que la imagen no se desborde del borde redondeado */
+    width: 700px; /* Ancho fijo para las tarjetas, ajusta según necesites */
+    max-width: 100%;
+    text-align: left;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover, .banner-card:hover {
+    transform: translateY(-5px); /* Pequeño efecto de levantamiento al pasar el ratón */
+}
+
+.product-card img, .banner-card img {
+    width: 100%;
+    height: 200px; /* Altura fija para las imágenes */
+    object-fit: cover; /* Recorta la imagen para que cubra el área sin distorsionarse */
+    display: block; /* Elimina el espacio extra debajo de las imágenes */
+}
+
+.product-info, .banner-info {
+    padding: 15px;
+}
+
+.product-info h3, .banner-info h3 {
+    font-size: 1.3em;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.product-info p, .banner-info p {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.product-info .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+
+/* --- ESTILOS ESPECÍFICOS DEL CATÁLOGO --- */
+
+.catalogue-layout {
+    display: grid;
+    /* Define la estructura de dos columnas: 1 columna de ancho fijo para filtros, 
+       y la otra columna para los productos que toma el espacio restante (fr) */
+    grid-template-columns: 250px 1fr; 
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Sidebar de Filtros */
+.sidebar {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.filter-button {
+    width: 100%;
+    padding: 8px;
+    font-size: 1em;
+}
+
+.filter-list {
+    list-style: none;
+    padding: 0;
+}
+
+.filter-list li {
+    margin-bottom: 8px;
+}
+
+.filter-list a {
+    text-decoration: none;
+    color: var(--text-dark);
+    display: block;
+    padding: 5px 0;
+}
+
+.filter-list a:hover {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #e9ecef;
+    margin: 20px 0;
+}
+
+/* Cuadrícula de Productos */
+.product-grid {
+    display: grid;
+    /* Crea un diseño responsivo, 3 columnas si hay espacio, mínimo 280px */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px;
+}
+
+/* Sobrescribe la tarjeta de producto para el catálogo */
+.product-card {
+    /* (Se mantienen los estilos ya definidos en la sección anterior para .product-card) */
+    text-align: center;
+}
+
+.product-info .description {
+    min-height: 40px; /* Evita que las tarjetas salten si la descripción es corta */
+    color: var(--secondary-color);
+}
+
+.add-to-cart-button {
+    font-size: 0.9em;
+    padding: 8px 15px;
+    margin-top: 10px;
+}
+
+
+/* --- ESTILOS PARA DETALLE DE PRODUCTO --- */
+
+.product-detail-container {
+    padding-top: 30px;
+}
+
+.breadcrumbs {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.breadcrumbs a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.detail-layout {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start; /* Alinea los bloques al inicio */
+}
+
+/* Imagen y Galería */
+.product-image-gallery {
+    flex: 1.2; /* Ocupa un poco más de espacio que el bloque de info */
+    text-align: center;
+}
+
+.main-product-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Información del Producto */
+.product-info-block {
+    flex: 1;
+}
+
+.product-info-block h1 {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.product-price {
+    margin: 20px 0;
+}
+
+.large-price {
+    font-size: 2.5em;
+    color: var(--accent-color); /* Verde para el precio */
+    font-weight: bold;
+}
+
+.price-label {
+    font-size: 1em;
+    color: var(--secondary-color);
+    display: block;
+}
+
+/* Stock y Cantidad */
+.stock-status {
+    font-weight: bold;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.in-stock {
+    color: var(--accent-color); /* Verde */
+}
+
+.out-of-stock {
+    color: #dc3545; /* Rojo */
+}
+
+.quantity-selector {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-selector input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.large-button {
+    width: 100%;
+    font-size: 1.2em;
+}
+
+.category-tag {
+    display: inline-block;
+    background-color: #e9ecef;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+.category-tag a {
+    color: var(--text-dark);
+    text-decoration: none;
+}
+
+/* Estilos de la sección de productos relacionados */
+.related-products {
+    padding: 40px 0;
+}
+
+/* Media Query para responsividad: cambia a una sola columna en pantallas pequeñas */
+@media (max-width: 900px) {
+    .detail-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+
+/* --- ESTILOS PARA EL PANEL DE CLIENTE --- */
+
+.account-panel-container h1 {
+    margin-bottom: 25px;
+    font-size: 2em;
+    text-align: left;
+}
+
+.panel-layout {
+    display: grid;
+    /* 1 columna lateral fija y 1 columna de contenido flexible */
+    grid-template-columns: 200px 1fr;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.account-sidebar {
+    background-color: white;
+    padding: 20px 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.account-sidebar h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.panel-nav-list {
+    list-style: none;
+    padding: 0;
+}
+
+.panel-nav-list li {
+    margin-bottom: 5px;
+}
+
+.panel-nav-list a {
+    display: block;
+    padding: 8px 10px;
+    text-decoration: none;
+    color: var(--text-dark);
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.panel-nav-list a:hover {
+    background-color: var(--background-light);
+    color: var(--primary-color);
+}
+
+/* Estilo para la opción activa */
+.panel-nav-list a.active {
+    background-color: var(--primary-color);
+    color: white !important;
+    font-weight: bold;
+}
+
+.panel-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.logout-link {
+    color: #dc3545 !important;
+}
+
+@media (max-width: 768px) {
+    .panel-layout {
+        /* En móvil, las columnas se apilan */
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* --- ESTILOS PARA FORMULARIO DE CUENTA Y CAMPOS DE INPUT --- */
+
+/* Contenedor del formulario dentro del Panel de Cliente */
+.panel-content form {
+    background-color: #fcfcfc;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.panel-content h1 {
+    font-size: 1.8em;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.panel-content p {
+    color: var(--secondary-color);
+    margin-bottom: 25px;
+}
+
+.panel-content h2 {
+    font-size: 1.3em;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--background-light);
+    padding-bottom: 8px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+/* Estilo para las etiquetas (Labels) */
+label {
+    display: block; /* Ocupa todo el ancho */
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+    font-size: 0.95em;
+}
+
+/* Estilo general para los campos de entrada (Inputs) */
+.input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da; /* Borde gris suave */
+    border-radius: 5px;
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Efecto al enfocar (Focus) el input */
+.input:focus {
+    border-color: var(--primary-color); /* Borde azul al enfocar */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra de enfoque */
+    outline: none; /* Eliminar el contorno por defecto del navegador */
+}
+
+/* La línea divisoria */
+.panel-content hr {
+    border: 0;
+    height: 1px;
+    background: #e9ecef;
+    margin: 25px 0;
+}
+
+/* El botón de guardar usa el estilo cta-button ya definido */
+.cta-button {
+    /* El estilo de cta-button debe estar definido arriba en style.css */
+    /* Asegúrate de que tenga un padding y margin adecuados */
+    display: block; /* Hace que el botón ocupe todo el ancho del formulario */
+    width: 100%;
+}
+
+
+/* --- ESTILOS PARA DETALLE DE FACTURA / VENTA --- */
+
+.factura-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado Principal */
+.factura-container h2 {
+    font-size: 2.5em;
+    color: var(--primary-color);
+    border-bottom: 3px solid var(--background-light);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Encabezados de Sección (Dirección, Productos, Pago) */
+.factura-container h3 {
+    font-size: 1.5em;
+    color: var(--text-dark);
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-left: 5px solid var(--accent-color); /* Toque de color */
+    padding-left: 10px;
+}
+
+/* Párrafos de Información (Fecha, Total, Dirección) */
+.factura-container p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.factura-container p strong {
+    font-weight: 700;
+    color: var(--primary-color);
+    display: inline-block;
+    min-width: 100px; /* Alineación visual */
+}
+
+/* --- Estilos para la Tabla de Productos --- */
+
+.factura-container table {
+    margin-top: 20px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.factura-container thead tr {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.factura-container th, .factura-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #dee2e6;
+}
+
+.factura-container td:last-child {
+    text-align: right; /* Alinear el precio a la derecha */
+    font-weight: bold;
+}
+
+.factura-container tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Rayado para mejor legibilidad */
+}
+
+/* Estilo para el Total Final */
+.factura-container p:last-of-type {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 2px solid var(--background-light);
+    font-size: 1.2em;
+}
+
+/* Botón Volver */
+.btn-secondary {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 30px;
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+
+/* --- ESTILOS PARA EL PANEL DE ADMINISTRACIÓN (Tablas de Datos) --- */
+
+.admin-panel {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.admin-panel h2 {
+    font-size: 2em;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+}
+
+/* Estilo para el botón principal "Crear Producto" */
+.btn-success {
+    background-color: var(--accent-color); /* Verde */
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: 600;
+}
+
+.btn-success:hover {
+    background-color: #3b885b; /* Verde ligeramente más oscuro */
+}
+
+/* --- Estilos de la Tabla de Productos --- */
+
+/* Contenedor para hacer la tabla scrollable si es necesario */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.9em;
+    min-width: 700px; /* Asegura un ancho mínimo en dispositivos pequeños */
+}
+
+.admin-table thead tr {
+    background-color: #f0f0f0; /* Color gris claro para la cabecera (como en tu HTML) */
+    color: var(--text-dark);
+    border-bottom: 2px solid #dee2e6;
+}
+
+.admin-table th, .admin-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+/* Centrar contenido específico */
+.admin-table th:nth-child(3), .admin-table td:nth-child(3),
+.admin-table th:nth-child(4), .admin-table td:nth-child(4) {
+    text-align: center;
+}
+
+/* Filas con estilo rayado para mejor legibilidad */
+.admin-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #f6f6f6;
+}
+
+/* --- Estilos para Botones de Acción --- */
+
+.admin-table td:last-child {
+    white-space: nowrap; /* Evita que los botones se rompan en varias líneas */
+    text-align: center;
+}
+
+/* Botones genéricos de acción (Editar y Eliminar) */
+.btn {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary-color); /* Azul */
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Rojo */
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* --- Responsividad para la tabla --- */
+/* En el entorno de administración, generalmente se espera una pantalla más grande,
+   pero siempre es bueno asegurar la horizontal scroll si es necesario. */
+@media (max-width: 768px) {
+    .admin-panel {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+}
+
+
+/* --- ESTILOS PARA FORMULARIO DE PRODUCTO (CRUD) --- */
+
+/* Estilo para el contenedor del formulario */
+.product-form-container {
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Encabezado */
+.product-form-container h2 {
+    font-size: 1.8em;
+    color: var(--text-dark);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Etiqueta (Label) */
+.product-form-container label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--text-dark);
+}
+
+/* Campo de Control Genérico (Input, Textarea, Select) */
+.form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Asegura que padding no afecte el ancho total */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* Estilo específico para Textarea */
+.product-form-container textarea.form-control {
+    resize: vertical; /* Permite redimensionar solo verticalmente */
+}
+
+/* Estilo para la imagen actual (si está presente) */
+.product-form-container .current-image-preview {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px dashed #ced4da;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.product-form-container .current-image-preview img {
+    display: block;
+    border-radius: 4px;
+}
+
+/* Botón Guardar (usando .btn-success ya definido) */
+.btn-success {
+    /* Estilo ya definido, solo aseguramos que ocupe el ancho */
+    width: 100%;
+}
+
+/* Botón Volver (usando .btn-secondary ya definido) */
+.btn-secondary {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+
+/* --- ESTILOS PARA EL CARRITO DE COMPRAS (Override Bootstrap) --- */
+
+/* Estilo para la tabla principal del carrito */
+.table-dark {
+    background-color: var(--primary-color) !important; /* Cabecera con color primario */
+    color: white;
+}
+
+/* Filas de la tabla (Bootstrap usa table-striped) */
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: #f8f8f8; /* Un gris muy suave para las filas impares */
+}
+
+/* Celdas para un mejor aspecto */
+.table th, .table td {
+    border-color: #e9ecef; /* Bordes de celda más suaves */
+    padding: 12px;
+}
+
+/* Controles de Cantidad */
+.table td .form-control {
+    width: 80px !important; /* Hace el input de cantidad más estrecho */
+    text-align: center;
+    padding: 6px;
+    height: auto;
+    font-size: 1em;
+}
+
+.table td .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-size: 0.9em;
+    padding: 6px 10px;
+}
+
+.table td .btn-primary:hover {
+    background-color: #0056b3; /* Tono más oscuro de azul */
+    border-color: #0056b3;
+}
+
+/* Botón "Quitar" */
+.table td .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.table td .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #c82333;
+}
+
+/* Fila de Totales */
+.text-end h3 strong {
+    color: var(--accent-color); /* Precio total en color de acento (verde) */
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+/* Botones Inferiores */
+.justify-content-between a.btn {
+    padding: 10px 25px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border-radius: 5px;
+}
+
+/* Botón Vaciar Carrito */
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Botón Proceder al Pago (Checkout) */
+.btn-success {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-success:hover {
+    background-color: #3b885b; /* Verde ligeramente más oscuro */
+    border-color: #3b885b;
+}
+
+/* Carrito Vacío */
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #bee5eb;
+    padding: 30px;
+    margin-top: 50px;
+}
+
+
+/* --- ESTILOS PARA SECCIÓN DE PRODUCTOS SIMILARES / RELACIONADOS --- */
+
+.related-products {
+    margin-top: 50px;
+    padding: 30px 0;
+    background-color: #f8f8f8; /* Fondo suave para la sección */
+    border-top: 1px solid #eee;
+}
+
+.related-products h3 {
+    font-size: 2em;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.related-products h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+}
+
+/* Contenedor de la Card */
+.related-products .card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden; /* Asegura que la imagen no sobresalga */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-bottom: 25px; /* Espacio entre tarjetas en móviles */
+}
+
+.related-products .card:hover {
+    transform: translateY(-5px); /* Efecto hover sutil */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen del Producto en la Card */
+.related-products .card-img-top {
+    width: 100%;
+    height: 200px; /* Altura fija para uniformidad */
+    object-fit: cover; /* Recorta la imagen para que cubra el espacio */
+    border-bottom: 1px solid #eee;
+}
+
+/* Cuerpo de la Card */
+.related-products .card-body {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Título del Producto */
+.related-products .card-title {
+    font-size: 1.2em;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    height: 2.4em; /* Altura fija para títulos de dos líneas */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+/* Precio del Producto */
+.related-products .card-body p {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: var(--accent-color); /* Color de acento para el precio */
+    margin-bottom: 15px;
+}
+
+/* Botón "Ver Producto" */
+.related-products .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.related-products .btn-primary:hover {
+    background-color: #0056b3; /* Tono más oscuro de azul */
+    border-color: #0056b3;
+}
+
+/* Ajustes de Responsividad (col-md-3 ya hace gran parte del trabajo) */
+@media (max-width: 767px) {
+    .related-products .col-md-3 {
+        flex: 0 0 50%; /* Dos columnas en pantallas pequeñas */
+        max-width: 50%;
+    }
+}
+
+@media (max-width: 575px) {
+    .related-products .col-md-3 {
+        flex: 0 0 100%; /* Una columna en pantallas muy pequeñas */
+        max-width: 100%;
+    }
+}

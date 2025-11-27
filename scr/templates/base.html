@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}E-commerce Inteligente{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Style.css') }}">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}">Inicio</a> |
+            <a href="{{ url_for('catalogo') }}">Catálogo</a> | 
+            <a href="{{url_for('carrito')}}">Carrito</a> |
+                    {% if 'user_id' in session:%}
+            <a href="{{url_for('dashboard')}}">Mi Cuenta</a> |
+            <a href="{{ url_for('logout') }}">Cerrar sesion</a> |
+            {%if session['user_role']=='Administrador'%}
+            <a href="{{ url_for('admin_productos') }}">Administrar</a>
+            {% endif %}
+                    {%else%}
+            <a href="{{ url_for('login') }}">Iniciar Sesion</a> |
+            <a href="{{ url_for('register') }}">Registro</a>
+                    {% endif %}
+        </nav>
+    </header>
+
+    <div class="content">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="container mt-3">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 E-commerce. {% block footer_extra %}{% endblock %}</p>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

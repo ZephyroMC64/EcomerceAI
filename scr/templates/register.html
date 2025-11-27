@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Registrarse - E-commerce Inteligente{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <section class="register-form">
+            <div class="product-card" style="width: 400px; margin: 50px auto; padding: 30px;">
+                <img src="{{ url_for('static', filename='img/2.jpg') }}" alt="Nuevos Gadgets Tech">
+                <h2 style="text-align: center; color: var(--accent-color);">Crear Cuenta</h2>
+                <p style="text-align: center; margin-bottom: 20px;">Únete a nuestra plataforma para empezar a comprar.</p>
+                
+                <form action="register" method="POST">
+                    <div style="margin-bottom: 15px;">
+                        <label for="nombre" style="display: block; font-weight: bold; margin-bottom: 5px;">Nombre Completo:</label>
+                        <input type="text" id="nombre" name="nombre" required 
+                               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+                    </div>
+
+                    <div style="margin-bottom: 15px;">
+                        <label for="email" style="display: block; font-weight: bold; margin-bottom: 5px;">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" required 
+                               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label for="password" style="display: block; font-weight: bold; margin-bottom: 5px;">Contraseña:</label>
+                        <input type="password" id="password" name="password" required 
+                               style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 1em;">
+                    </div>
+                    
+                    <button type="submit" class="cta-button" style="width: 100%;">
+                        Crear Cuenta
+                    </button>
+                </form>
+
+                <p style="text-align: center; margin-top: 20px; font-size: 0.9em;">
+                    ¿Ya tienes cuenta? <a href="{{ url_for('login') }}" style="color: var(--primary-color); text-decoration: none; font-weight: bold;">Inicia Sesión</a>.
+                </p>
+            </div>
+        </section>
+    </div>
+{% endblock %}

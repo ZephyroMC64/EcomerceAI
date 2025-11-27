@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}Mi Cuenta - {{ section_title }}{% endblock %}
+
+{% block content %}
+
+    <div class="container account-panel-container">
+        <h1>Mi Cuenta</h1>
+        
+        <div class="panel-layout">
+            
+            {# ========================================== #}
+            {# MENÚ LATERAL DE NAVEGACIÓN #}
+            {# ========================================== #}
+            <aside class="account-sidebar">
+                <h3>Opciones de Cuenta</h3>
+                <ul class="panel-nav-list">
+                    <li>
+                        {# Enlace a la gestión de perfil/direcciones #}
+                        <a href="{{ url_for('administrar_cuenta') }}" class="{% if active_tab == 'perfil' %}active{% endif %}">
+                            ⚙️ Administrar Cuenta
+                        </a>
+                    </li>
+                    <li>
+                        {# Enlace a la lista de pedidos #}
+                        <a href="{{ url_for('rastrear_pedidos') }}" class="{% if active_tab == 'pedidos' %}active{% endif %}">
+                            📦 Rastrear Pedidos
+                        </a>
+                    </li>
+                    <li>
+                        {# Enlace a las facturas/historial de pagos #}
+                        <a href="{{ url_for('ver_facturas') }}" class="{% if active_tab == 'facturas' %}active{% endif %}">
+                            🧾 Facturas y Pagos
+                        </a>
+                    </li>
+                    <hr>
+                    <li>
+                        <a href="{{ url_for('logout') }}" class="logout-link">
+                            ➡️ Cerrar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            {# ========================================== #}
+            {# CONTENIDO DINÁMICO DE LA SECCIÓN (MAIN ÚNICO) #}
+            {# ========================================== #}
+            <main class="panel-content">
+                <h2>{{ section_title }}</h2>
+                
+                {# Contenido específico para ADMINISTRAR CUENTA #}
+                {% if active_tab == 'perfil' %}
+                    <div class="container">
+                        <h1>Administrar Mi Cuenta</h1>
+                        <p>Actualiza tus datos personales y tu dirección.</p>
+
+                        <form action="" method="POST" style="max-width: 600px; margin-top: 25px;">
+
+                            <h2>Datos Personales</h2>
+
+                            <label>Nombre Completo:</label>
+                            <input type="text" name="nombre" value="{{ usuario.nombre }}" required class="input">
+
+                            <label>Correo Electrónico:</label>
+                            <input type="email" name="email" value="{{ usuario.email }}" required class="input" disabled>
+
+                            <label>Teléfono:</label>
+                            <input type="text" name="telefono" value="{{ usuario.telefono }}" class="input">
+
+                            <hr style="margin: 25px 0;">
+
+                            <h2>Dirección</h2>
+
+                            <label>Nombre de dirección (Casa, Trabajo, etc):</label>
+                            <input type="text" name="nombre_direccion" value="{{ direccion.nombre_direccion }}" class="input">
+
+                            <label>Dirección:</label>
+                            <input type="text" name="linea1" value="{{ direccion.linea1 }}" required class="input">
+
+                            <label>Ciudad:</label>
+                            <input type="text" name="ciudad" value="{{ direccion.ciudad }}" required class="input">
+
+                            <label>País:</label>
+                            <input type="text" name="pais" value="{{ direccion.pais }}" required class="input">
+
+                            <label>Código Postal:</label>
+                            <input type="text" name="codigo_postal" value="{{ direccion.codigo_postal }}" class="input">
+
+                            <button type="submit" class="cta-button" style="margin-top:20px;">
+                                Guardar Cambios
+                            </button>
+                        </form>
+                    </div>
+
+                {# Contenido específico para RASTREAR PEDIDOS #}
+                {% elif active_tab == 'pedidos' %}
+                    {% if pedidos %}
+                        <div class="pedidos-list">
+                            {% for pedido in pedidos %}
+                            <div class="pedido-card">
+                                <div class="pedido-header">
+                                    <span class="pedido-id">Pedido #{{ pedido.id }}</span>
+                                    <span class="estado {{ pedido.estado | replace(' ', '') | lower }}">{{ pedido.estado }}</span>
+                                </div>
+
+                                <div class="pedido-summary">
+                                    <p><strong>Fecha:</strong> {{ pedido.fecha_creacion.strftime('%d/%m/%Y %H:%M') }}</p>
+                                    <p><strong>Total:</strong> <span class="pedido-total">${{ "%.2f"|format(pedido.total) }}</span></p>
+
+                                    {% if pedido.numero_rastreo %}
+                                        <p><strong>Rastreo:</strong> <span class="tracking-number">{{ pedido.numero_rastreo }}</span></p>
+                                        <p><strong>Transportadora:</strong> {{ pedido.proveedor_logistico }}</p>
+                                    {% else %}
+                                        <p class="no-tracking"><em>Este pedido aún no tiene número de rastreo.</em></p>
+                                    {% endif %}
+                                </div>
+
+                                <div class="detalle">
+                                    <h4>Productos:</h4>
+                                    <div class="detalle-items-list">
+                                        {% for item in pedido.detalles %}
+                                            <p class="detalle-item">
+                                                {{ item.producto.nombre }} (x{{ item.cantidad }}) — ${{ "%.2f"|format(item.precio_unitario) }}
+                                            </p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <a href="" class="cta-button mini-button">
+                                    Ver Detalles
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="no-pedidos">
+                            <h3>No tienes pedidos aún 😥</h3>
+                            <p>Cuando compres algo, aparecerá aquí. ¡Explora nuestro <a href="{{ url_for('catalogo') }}">catálogo</a>!</p>
+                        </div>
+                    {% endif %}
+
+                {# Contenido específico para FACTURAS Y PAGOS #}
+                {% elif active_tab == 'facturas' %}
+                    {% if facturas %}
+                        <div class="facturas-table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID Transacción</th>
+                                        <th>Fecha</th>
+                                        <th>Monto Total</th>
+                                        <th>Estado Pedido</th>
+                                        <th>Estado Pago</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for f in facturas %}
+                                    <tr>
+                                        <td data-label="ID">{{ f.id }}</td>
+                                        <td data-label="Fecha">{{ f.fecha_creacion.strftime("%Y-%m-%d") }}</td>
+                                        <td data-label="Total" class="total">${{ "%.2f"|format(f.total) }}</td>
+                                        <td data-label="Estado Pedido">
+                                            <span class="status-tag pedido-{{ f.estado | replace(' ', '') | lower }}">{{ f.estado }}</span>
+                                        </td>
+                                        <td data-label="Pago">
+                                            <span class="status-tag pago-{{ f.estado_pago | lower }}">{{ f.estado_pago }}</span>
+                                        </td>
+                                        <td data-label="Ver">
+                                            <a href="/factura/{{ f.id }}" target="_blank" class="cta-button mini-button fact-button">
+                                                Descargar PDF
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="no-pedidos">
+                            <h3>No hay facturas disponibles</h3>
+                            <p>Las facturas se generan al confirmar el pago de un pedido.</p>
+                        </div>
+                    {% endif %}
+
+                {% else %}
+                    <p>Selecciona una opción del menú lateral para comenzar.</p>
+                {% endif %}
+                
+            </main>
+        </div>
+    </div>
+{% endblock %}

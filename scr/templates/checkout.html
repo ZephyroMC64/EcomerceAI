@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Finalizar Compra{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>🛒 Finalizar Compra</h2>
+    <hr>
+
+    <form action="{{ url_for('procesar_checkout') }}" method="POST">
+
+        <h4>Dirección de Envío</h4>
+        <select name="direccion_envio" class="form-control" required>
+            {% for direccion in direcciones %}
+            <option value="{{ direccion.id }}">
+                {{ direccion.nombre_direccion }} - {{ direccion.ciudad }} ({{ direccion.pais }})
+            </option>
+            {% endfor %}
+        </select>
+
+        <hr>
+        <h4>Método de Pago</h4>
+        <select name="metodo_pago" class="form-control" required>
+            <option value="Tarjeta Crédito">Tarjeta de Crédito</option>
+            <option value="Tarjeta Débito">Tarjeta Débito</option>
+            <option value="Nequi">Nequi</option>
+            <option value="Daviplata">Daviplata</option>
+            <option value="Contraentrega">Pago Contraentrega</option>
+        </select>
+
+        <hr>
+        <h4>Proveedor Logístico</h4>
+        <select name="proveedor_logistico" class="form-control" required>
+            <option value="Servientrega">Servientrega</option>
+            <option value="Interrapidísimo">Interrapidísimo</option>
+            <option value="Coordinadora">Coordinadora</option>
+            <option value="Envia">Envía</option>
+        </select>
+
+        <hr>
+        <h3>Total: ${{ "{:,.2f}".format(total) }}</h3>
+        <button type="submit" class="btn btn-success mt-3">Confirmar Pedido</button>
+    </form>
+</div>
+{% endblock %}

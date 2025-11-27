@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container admin-panel"> <h2>Administrar Productos</h2>
+
+    <a href="/admin/producto/nuevo" class="btn btn-success" 
+        style="margin-bottom:20px;">
+        + Crear Producto
+    </a>
+
+    <div class="table-responsive"> <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Categoría</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for producto in productos %}
+                <tr>
+                    <td>{{ producto.id }}</td>
+                    <td>{{ producto.nombre }}</td>
+                    <td>${{ "%.2f"|format(producto.precio) }}</td> <td>{{ producto.stock_total }}</td> <td>{{ categoria.nombre if producto.categoria else "Sin Categoría" }}</td>
+
+                    <td>
+                        <a href="/admin/producto/editar/{{ producto.id }}" 
+                            class="btn btn-primary">
+                            Editar
+                        </a>
+
+                        <a href="/admin/producto/eliminar/{{ producto.id }}"
+                            onclick="return confirm('¿Seguro que deseas eliminar este producto?');"
+                            class="btn btn-danger">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+{% endblock %}

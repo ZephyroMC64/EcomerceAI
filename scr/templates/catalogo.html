@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}Catálogo de Productos{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Explora Nuestro Catálogo Completo</h1>
+        <p>Encuentra el producto perfecto usando nuestros filtros avanzados y la barra de búsqueda.</p>
+
+        <div class="catalogue-layout">
+            
+            {# ========================================== #}
+            {# BARRA LATERAL DE FILTROS Y BÚSQUEDA #}
+            {# ========================================== #}
+            <aside class="sidebar">
+                <h3>🔍 Buscar Productos</h3>
+                <form action="{{ url_for('catalogo') }}" method="GET">
+                    <input type="text" name="q" placeholder="Buscar por nombre o SKU" class="search-input" value="{{ current_query | default('') }}">
+                    <button type="submit" class="cta-button filter-button">Buscar</button>
+                </form>
+
+                <hr>
+
+                <h3>⚙️ Filtrar por Categoría</h3>
+                <ul class="filter-list">
+                    {% for categoria in categorias %}
+                    <li>
+                        {# Ejemplo de cómo generar el enlace para un filtro #}
+                        <a href="{{ url_for('catalogo', category_id=categoria.id) }}">
+                            {{ categoria.nombre }} ({{ categoria.total_productos }})
+                        </a>
+                    </li>
+                    {% endfor %}
+                    <li><a href="{{ url_for('catalogo') }}">Mostrar Todos</a></li>
+                </ul>
+                
+                <hr>
+
+                <h3>💲 Rango de Precio</h3>
+                {# Aquí iría un formulario o slider de rango de precio #}
+                <p>Implementación futura...</p>
+            </aside>
+
+            {# ========================================== #}
+            {# CUADRÍCULA DE PRODUCTOS #}
+            {# ========================================== #}
+            <main class="product-grid-area">
+                {% if productos %}
+                    <div class="product-grid">
+                    {% for producto in productos %}
+                        <div class="product-card">
+                            <a href="{{ url_for('detalle_producto', producto_id=producto.id) }}">
+                                <img src="{{ url_for('static', filename='img/productos/' + producto.url_img) if producto.url_img else '...' }}" alt="{{ producto.nombre }}">
+                            </a>
+                            <div class="product-info">
+                                <h3>{{ producto.nombre }}</h3>
+                                <p class="description">{{ producto.descripcion | truncate(length=70) }}</p>
+                                <p class="price">${{ "{:,.2f}".format(producto.precio) }}</p>
+                                </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="no-results">No se encontraron productos que coincidan con tu búsqueda.</p>
+                {% endif %}
+            </main>
+        </div>
+    </div>
+{% endblock %}
